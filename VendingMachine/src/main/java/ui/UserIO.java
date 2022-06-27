@@ -1,6 +1,5 @@
 package ui;
 
-public class UserIO
 public interface UserIO {
     void print(String msg);
 
