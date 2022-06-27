@@ -36,7 +36,7 @@ public class VendingMachineDAOFileImpl implements VendingMachineDAO
         readItems();
         try
         {
-            Item item = items.get(name);
+            Item item = items.values().stream().filter((i) -> i.getName().equals(name)).findFirst().get();
             if(item.getQty() == 0)
             {
                 throw new NoItemInventoryException("-_- This item is out of stock: " + name);
