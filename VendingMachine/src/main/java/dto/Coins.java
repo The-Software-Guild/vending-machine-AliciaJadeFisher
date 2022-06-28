@@ -1,6 +1,9 @@
 package dto;
 
+/**
+ * Enum which represents each coin value
+ */
 public enum Coins
 {
-    TWENTYFIVE, TEN, FIVE, ONE
+    QUARTER, DIME, NICKEL, PENNY
 }

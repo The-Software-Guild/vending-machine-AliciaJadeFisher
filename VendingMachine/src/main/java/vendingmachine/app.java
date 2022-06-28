@@ -9,8 +9,19 @@ import ui.UserIO;
 import ui.UserIOConsoleImpl;
 import ui.VendingMachineView;
 
+/**
+ * Main app class for the application
+ */
 public class app
 {
+    /**
+     * Instantiates required classes for the program to run and calls the controller's run() method
+     * @param args
+     * @throws VendingMachinePersistenceException
+     * @throws VendingMachineDAOException
+     * @throws InsufficientFundsException
+     * @throws NoItemInventoryException
+     */
     public static void main(String[] args) throws VendingMachinePersistenceException, VendingMachineDAOException, InsufficientFundsException, NoItemInventoryException
     {
         UserIO myIo = new UserIOConsoleImpl();

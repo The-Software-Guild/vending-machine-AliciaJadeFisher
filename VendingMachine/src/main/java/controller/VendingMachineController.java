@@ -4,6 +4,7 @@ import dao.NoItemInventoryException;
 import dao.VendingMachineDAOException;
 import dao.VendingMachinePersistenceException;
 import dto.Coins;
+import dto.Item;
 import service.InsufficientFundsException;
 import service.VendingMachineServiceLayer;
 import ui.VendingMachineView;
@@ -11,41 +12,81 @@ import ui.VendingMachineView;
 import java.math.BigDecimal;
 import java.util.Map;
 
+/**
+ * Class which controls the program flow
+ */
 public class VendingMachineController
 {
     private VendingMachineView view;
     private VendingMachineServiceLayer service;
 
+    /**
+     * Main constructor which sets the view and service layer objects
+     * @param view - program view object
+     * @param service - program service layer object
+     */
     public VendingMachineController(VendingMachineView view, VendingMachineServiceLayer service)
     {
         this.view = view;
         this.service = service;
     }
 
+    /**
+     * Main program run method
+     * @throws VendingMachinePersistenceException
+     * @throws VendingMachineDAOException
+     * @throws InsufficientFundsException
+     * @throws NoItemInventoryException
+     */
     public void run() throws VendingMachinePersistenceException, VendingMachineDAOException, InsufficientFundsException, NoItemInventoryException
     {
+        // Calls methods to display main menu and get user inputs
         view.displayMainBanner();
-        BigDecimal amount = new BigDecimal("0.00");
-        String itemSelection = "";
-
-        amount = getAmount();
-        itemSelection = getItemSelection();
+        BigDecimal amount = getAmount();
+        Item itemSelection = getItemSelection();
         vendItem(itemSelection, amount);
         view.displayEndBanner();
     }
 
+    /**
+     * Method which controls the process of displaying the main menu to the user and getting the user's money amount
+     * @return user's amount of money
+     * @throws VendingMachinePersistenceException
+     * @throws VendingMachineDAOException
+     */
     public BigDecimal getAmount() throws VendingMachinePersistenceException, VendingMachineDAOException
     {
         view.printMainMenu(service.getAllItems());
         return view.getAmount();
     }
 
-    public String getItemSelection()
+    /**
+     * Method which controls the process of getting an item choice from the user
+     * @return name of chosen item
+     */
+    public Item getItemSelection() throws NoItemInventoryException, VendingMachinePersistenceException, VendingMachineDAOException
     {
-        return view.getItemChoice();
+        Item item;
+        do
+        {
+            String choice = view.getItemChoice();
+            item = service.getItem(choice);
+
+        } while (item == null);
+
+        return item;
     }
 
-    public void vendItem(String item, BigDecimal amount) throws VendingMachinePersistenceException, VendingMachineDAOException, InsufficientFundsException, NoItemInventoryException
+    /**
+     * Method which controls the process of vending a selected item
+     * @param item - item to vend
+     * @param amount - user's amount of money
+     * @throws VendingMachinePersistenceException
+     * @throws VendingMachineDAOException
+     * @throws InsufficientFundsException
+     * @throws NoItemInventoryException
+     */
+    public void vendItem(Item item, BigDecimal amount) throws VendingMachinePersistenceException, VendingMachineDAOException, InsufficientFundsException, NoItemInventoryException
     {
         Map<Coins, Integer> change = service.vendItem(item, amount);
         view.displayChange(change);

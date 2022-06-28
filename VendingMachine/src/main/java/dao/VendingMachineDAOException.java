@@ -1,5 +1,8 @@
 package dao;
 
+/**
+ * Exception Class which handles file access exceptions
+ */
 public class VendingMachineDAOException extends Exception
 {
     public VendingMachineDAOException(String message)
