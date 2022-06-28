@@ -45,10 +45,12 @@ public class VendingMachineController
         view.printMainMenu(service.getAllItems());
 
         BigDecimal amount = getAmount();
-        Item itemSelection;
+
+        // Checks if the user wants to exit or not
+        // If they do then the program stops, if not then it continues
         if(amount != null)
         {
-            itemSelection = getItemSelection();
+            Item itemSelection = getItemSelection();
 
             if(itemSelection != null)
             {
