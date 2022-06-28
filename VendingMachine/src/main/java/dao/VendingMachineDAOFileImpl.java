@@ -6,6 +6,7 @@ import java.io.*;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -72,7 +73,7 @@ public class VendingMachineDAOFileImpl implements VendingMachineDAO
                 return item;
             }
         }
-        catch (NoItemInventoryException e)
+        catch (NoItemInventoryException | NoSuchElementException e)
         {
             return null;
         }
