@@ -57,6 +57,12 @@ public class VendingMachineView
     public BigDecimal getAmount()
     {
         double money = io.readDouble("How much money do you have?: ");
+
+        if(money == (double)0)
+        {
+            return null;
+        }
+
         return new BigDecimal(String.valueOf(money));
     }
 

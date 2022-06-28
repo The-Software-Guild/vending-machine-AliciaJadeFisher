@@ -42,9 +42,20 @@ public class VendingMachineController
     {
         // Calls methods to display main menu and get user inputs
         view.displayMainBanner();
+        view.printMainMenu(service.getAllItems());
+
         BigDecimal amount = getAmount();
-        Item itemSelection = getItemSelection();
-        vendItem(itemSelection, amount);
+        Item itemSelection;
+        if(amount != null)
+        {
+            itemSelection = getItemSelection();
+
+            if(itemSelection != null)
+            {
+                vendItem(itemSelection, amount);
+            }
+        }
+
         view.displayEndBanner();
     }
 
@@ -56,7 +67,6 @@ public class VendingMachineController
      */
     public BigDecimal getAmount() throws VendingMachinePersistenceException, VendingMachineDAOException
     {
-        view.printMainMenu(service.getAllItems());
         return view.getAmount();
     }
 
@@ -70,6 +80,12 @@ public class VendingMachineController
         do
         {
             String choice = view.getItemChoice();
+
+            if(choice.equals("0"))
+            {
+               return null;
+            }
+
             item = service.getItem(choice);
 
         } while (item == null);
@@ -88,7 +104,21 @@ public class VendingMachineController
      */
     public void vendItem(Item item, BigDecimal amount) throws VendingMachinePersistenceException, VendingMachineDAOException, InsufficientFundsException, NoItemInventoryException
     {
-        Map<Coins, Integer> change = service.vendItem(item, amount);
+        Map<Coins,Integer> change;
+
+        while(true)
+        {
+            change = service.vendItem(item, amount);
+            if(change == null)
+            {
+                getItemSelection();
+            }
+            else
+            {
+                break;
+            }
+        }
+
         view.displayChange(change);
     }
 

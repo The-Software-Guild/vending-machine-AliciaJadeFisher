@@ -87,10 +87,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         }
         catch (InsufficientFundsException e)
         {
-            // Exits the system if they have insufficient funds
-            System.exit(1);
+            return null;
         }
-
-        return null;
     }
 }
