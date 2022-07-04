@@ -1,7 +1,6 @@
 package dao;
 
 import dto.Item;
-import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.math.BigDecimal;

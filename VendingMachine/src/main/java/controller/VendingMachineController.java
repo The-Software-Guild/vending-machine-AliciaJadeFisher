@@ -5,8 +5,6 @@ import dao.VendingMachineDAOException;
 import dao.VendingMachinePersistenceException;
 import dto.Coins;
 import dto.Item;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import service.InsufficientFundsException;
 import service.VendingMachineServiceLayer;
 import ui.VendingMachineView;

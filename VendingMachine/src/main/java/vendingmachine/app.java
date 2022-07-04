@@ -5,7 +5,6 @@ import dao.NoItemInventoryException;
 import dao.VendingMachineDAOException;
 import dao.VendingMachinePersistenceException;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import service.InsufficientFundsException;
 
