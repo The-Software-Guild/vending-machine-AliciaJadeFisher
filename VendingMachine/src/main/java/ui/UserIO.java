@@ -1,8 +1,5 @@
 package ui;
 
-/**
- * Interface for user input and output
- */
 public interface UserIO {
     void print(String msg);
 

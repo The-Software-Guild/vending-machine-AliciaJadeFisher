@@ -6,6 +6,8 @@ package ui;
  * @author ahill
  */
 
+import org.springframework.stereotype.Component;
+
 import java.util.Scanner;
 
 public class UserIOConsoleImpl implements UserIO

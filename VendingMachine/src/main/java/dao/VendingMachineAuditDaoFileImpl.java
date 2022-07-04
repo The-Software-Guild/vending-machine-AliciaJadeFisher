@@ -1,22 +1,16 @@
 package dao;
 
+import org.springframework.stereotype.Component;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 
-/**
- * Class which handles writing to the audit file
- */
 public class VendingMachineAuditDaoFileImpl implements VendingMachineAuditDao
 {
     public static final String AUDIT_FILE = "AuditItems.txt";
 
-    /**
-     * Appends new audit entry to the file
-     * @param entry - entry for file
-     * @throws VendingMachinePersistenceException
-     */
     @Override
     public void writeAuditEntry(String entry) throws VendingMachinePersistenceException
     {
