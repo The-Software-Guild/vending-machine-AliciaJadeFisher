@@ -27,7 +27,18 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     @Override
     public Item getItem(String id) throws VendingMachineDAOException, NoItemInventoryException
     {
-        return dao.getItem(id);
+        Item item = dao.getItem(id);
+
+        try{
+            if(item.getQty() == 0)
+            {
+                throw new NoItemInventoryException("-_- This item is out of stock: " + item.getName());
+            }
+        } catch (NoItemInventoryException e){
+            return null;
+        }
+
+        return item;
     }
 
     @Override

@@ -47,18 +47,10 @@ public class VendingMachineDAOFileImpl implements VendingMachineDAO
         readItems();
         try
         {
-            Item item = items.get(id);
+            return items.get(id);
 
-            if(item.getQty() == 0)
-            {
-                throw new NoItemInventoryException("-_- This item is out of stock: " + id);
-            }
-            else
-            {
-                return item;
-            }
         }
-        catch (NoItemInventoryException | NoSuchElementException e)
+        catch (NoSuchElementException e)
         {
             return null;
         }
