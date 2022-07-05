@@ -44,6 +44,11 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     @Override
     public Map<Coins, Integer> vendItem(Item item, BigDecimal amount) throws VendingMachineDAOException, VendingMachinePersistenceException
     {
+        if(item == null)
+        {
+            return null;
+        }
+
         BigDecimal price = item.getPrice();
 
         int compareAmount = amount.compareTo(price);

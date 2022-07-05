@@ -80,7 +80,7 @@ class VendingMachineServiceLayerImplTest
         Item item = service.getItem("A2");
         Map< Coins, Integer>  change = service.vendItem(item, BigDecimal.valueOf(1.15));
 
-        assertNotNull(change, "There should be change as an item was not vended, due to it having no inventory");
+        assertNull(change, "There should be no change as an item was not vended, due to it having no inventory");
     }
 
 
