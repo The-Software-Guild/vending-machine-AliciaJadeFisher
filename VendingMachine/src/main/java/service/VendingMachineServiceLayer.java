@@ -13,7 +13,7 @@ public interface VendingMachineServiceLayer
 {
     Map<String, Item> getAllItems() throws VendingMachinePersistenceException, VendingMachineDAOException;
 
-    Item getItem(String name) throws VendingMachinePersistenceException, VendingMachineDAOException, NoItemInventoryException;
+    Item getItem(String id) throws VendingMachinePersistenceException, VendingMachineDAOException, NoItemInventoryException;
 
     Map<Coins, Integer> vendItem(Item item, BigDecimal amount) throws VendingMachinePersistenceException, VendingMachineDAOException, InsufficientFundsException, NoItemInventoryException;
 }

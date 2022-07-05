@@ -10,6 +10,6 @@ public interface VendingMachineDAO
 
     Item vendItem(Item item) throws VendingMachineDAOException;
 
-    Item getItem(String name) throws VendingMachineDAOException, NoItemInventoryException;
+    Item getItem(String id) throws VendingMachineDAOException, NoItemInventoryException;
 
 }

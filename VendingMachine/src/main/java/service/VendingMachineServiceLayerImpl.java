@@ -1,9 +1,6 @@
 package service;
 
-import dao.NoItemInventoryException;
-import dao.VendingMachineAuditDao;
-import dao.VendingMachineDAO;
-import dao.VendingMachineDAOException;
+import dao.*;
 import dto.Coins;
 import dto.Item;
 
@@ -34,7 +31,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     }
 
     @Override
-    public Map<Coins, Integer> vendItem(Item item, BigDecimal amount) throws VendingMachineDAOException, InsufficientFundsException, NoItemInventoryException
+    public Map<Coins, Integer> vendItem(Item item, BigDecimal amount) throws VendingMachineDAOException, VendingMachinePersistenceException
     {
         BigDecimal price = item.getPrice();
 
@@ -49,6 +46,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
 
             item.setQty(item.getQty() - 1);
             dao.vendItem(item);
+            auditDao.writeAuditEntry(item.toString());
 
             Change change = new Change(amount, price);
             return change.getChange();
