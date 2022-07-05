@@ -12,8 +12,18 @@ import java.util.Scanner;
 public class VendingMachineDAOFileImpl implements VendingMachineDAO
 {
     private Map<String, Item> items = new HashMap<>();
-    private static final String ITEM_FILE = "VendingMachine.txt";
+    private static  String ITEM_FILE;
     private static final String DELIMITER = "::";
+
+    public VendingMachineDAOFileImpl()
+    {
+        ITEM_FILE = "VendingMachine.txt";
+    }
+
+    public VendingMachineDAOFileImpl(String testFile)
+    {
+        ITEM_FILE = testFile;
+    }
 
     @Override
     public Map<String, Item> getAllItems() throws VendingMachineDAOException
@@ -26,7 +36,7 @@ public class VendingMachineDAOFileImpl implements VendingMachineDAO
     public Item vendItem(Item item) throws VendingMachineDAOException
     {
         readItems();
-        Item vendedItem = items.put(item.getName(), item);
+        Item vendedItem = items.put(item.getId(), item);
         writeItems();
         return vendedItem;
     }
