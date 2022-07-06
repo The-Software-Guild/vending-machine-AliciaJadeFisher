@@ -47,7 +47,7 @@ public class VendingMachineDAOFileImpl implements VendingMachineDAO
         readItems();
         try
         {
-            return items.get(id);
+            return items.values().stream().filter((i) -> i.getId().equals(id)).findFirst().get();
 
         }
         catch (NoSuchElementException e)
