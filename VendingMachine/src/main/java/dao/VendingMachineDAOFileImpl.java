@@ -45,15 +45,7 @@ public class VendingMachineDAOFileImpl implements VendingMachineDAO
     public Item getItem(String id) throws VendingMachineDAOException, NoItemInventoryException
     {
         readItems();
-        try
-        {
-            return items.values().stream().filter((i) -> i.getId().equals(id)).findFirst().get();
-
-        }
-        catch (NoSuchElementException e)
-        {
-            return null;
-        }
+        return items.get(id);
     }
     public void readItems() throws VendingMachineDAOException
     {
